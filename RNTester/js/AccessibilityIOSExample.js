@@ -128,6 +128,101 @@ class ScreenReaderStatusExample extends React.Component<{}, $FlowFixMeState> {
   }
 }
 
+class AccessibilityRoleAndStateExample extends React.Component<{}> {
+  render() {
+    return (
+      <View>
+        <View
+            //accessibilityRole="alert"
+            accessible={true}>
+            <Text>Alert example</Text>
+        </View>
+        <View
+            //accessibilityRole="checkbox"
+            //accessibilityStates={['checked']}
+            accessible={true}>
+            <Text>Checkbox example</Text>
+        </View>
+        <View
+            //accessibilityRole="combobox"
+            accessible={true}>
+            <Text>Combobox example</Text>
+        </View>
+        <View
+            //accessibilityRole="editabletext"
+            accessible={true}>
+            <Text>Editable text example</Text>
+        </View>
+        <View
+            //accessibilityRole="menu"
+            accessible={true}>
+            <Text>Menu example</Text>
+        </View>
+        <View
+            //accessibilityRole="menubar"
+            accessible={true}>
+            <Text>Menu bar example</Text>
+        </View>
+        <View
+            //accessibilityRole="menuitem"
+            accessible={true}>
+            <Text>Menu item example</Text>
+        </View>
+        <View
+            //accessibilityRole="progressbar"
+            accessible={true}>
+            <Text>Progress bar example</Text>
+        </View>
+        <View
+            //accessibilityRole="radiobutton"
+            accessible={true}>
+            <Text>Progress bar example</Text>
+        </View>
+        <View
+            //accessibilityRole="radiogroup"
+            accessible={true}>
+            <Text>Progress bar example</Text>
+        </View>
+        <View
+            //accessibilityRole="scrollbar"
+            accessible={true}>
+            <Text>Scrollbar example</Text>
+        </View>
+        <View
+            //accessibilityRole="spinbutton"
+            accessible={true}>
+            <Text>Spin button example</Text>
+        </View>
+        <View
+            //accessibilityRole="switch"
+            //accessibilityStates={["on"]}
+            accessible={true}>
+            <Text>Switch example</Text>
+        </View>
+        <View
+            //accessibilityRole="tab"
+            accessible={true}>
+            <Text>Tab example</Text>
+        </View>
+        <View
+            //accessibilityRole="tablist"
+            accessible={true}>
+            <Text>Tab list example</Text>
+        </View>
+        <View
+            //accessibilityRole="timer"
+            accessible={true}>
+            <Text>Timer example</Text>
+        </View>
+        <View
+            //accessibilityRole="toolbar"
+            accessible={true}>
+            <Text>Toolbar example</Text>
+        </View>
+      </View>
+    );
+  }
+}
 exports.title = 'AccessibilityIOS';
 exports.description = "Interface to show iOS' accessibility samples";
 exports.examples = [
@@ -141,6 +236,12 @@ exports.examples = [
     title: 'Check if the screen reader is enabled',
     render(): React.Element<any> {
       return <ScreenReaderStatusExample />;
+    },
+  },
+    {
+    title: 'New accessibility roles and states',
+    render(): React.Element<any> {
+      return <AccessibilityRoleAndStateExample />;
     },
   },
 ];
