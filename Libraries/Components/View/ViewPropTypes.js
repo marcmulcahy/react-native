@@ -10,7 +10,7 @@
 
 'use strict';
 
-import type {PressEvent, Layout, LayoutEvent} from 'CoreEventTypes';
+import type {PressEvent, Layout, LayoutEvent, SyntheticEvent} from 'CoreEventTypes';
 import type {EdgeInsetsProp} from 'EdgeInsetsPropType';
 import type React from 'React';
 import type {ViewStyleProp} from 'StyleSheet';
@@ -32,7 +32,7 @@ type DirectEventProps = $ReadOnly<{|
    *
    * @platform ios
    */
-  onAccessibilityAction?: ?(string) => void,
+  onAccessibilityAction?: ?(event: SyntheticEvent) => void,
 
   /**
    * When `accessible` is true, the system will try to invoke this function

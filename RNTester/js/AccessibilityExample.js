@@ -400,6 +400,53 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
   }
 }
 
+class AccessibilityActionsExample extends React.Component {
+  render() {
+    return (
+      <View>
+        <RNTesterBlock title="View with multiple actions">
+          <View
+            accessible={true}
+            accessibilityActions={['cut', 'copy', 'paste']}
+            onAccessibilityAction={(event) =>
+              {switch(event.nativeEvent.action) {
+                case 'cut':
+                  Alert.alert('Alert', 'cut action success')
+                  break;
+                case 'copy':
+                  Alert.alert('Alert', 'copy action success')
+                  break;
+                case 'paste':
+                  Alert.alert('Alert', 'paste action success')
+                  break;
+              }}
+            }>
+            <Text>This view support many actions.</Text>
+          </View>
+        </RNTesterBlock>
+
+        <RNTesterBlock title="Adjustable with increment/decrement actions">
+          <View
+            accessible={true}
+            accessibilityRole="adjustable"
+            onAccessibilityAction={(event) =>
+              {switch(event.nativeEvent.action) {
+                case 'increment':
+                  Alert.alert('Alert', 'increment action success')
+                  break;
+                case 'decrement':
+                  Alert.alert('Alert', 'decrement action success')
+                  break;
+              }}
+            }>
+            <Text>Slider</Text>
+          </View>
+        </RNTesterBlock>
+      </View>
+    );
+  }
+}
+
 class ScreenReaderStatusExample extends React.Component<{}> {
   state = {
     screenReaderEnabled: false,
@@ -455,6 +502,12 @@ exports.examples = [
     title: 'New accessibility roles and states',
     render(): React.Element<typeof AccessibilityRoleAndStateExamples> {
       return <AccessibilityRoleAndStateExample />;
+    },
+  },
+  {
+    title: 'Accessibility action examples',
+    render(): React.Element<typeof AccessibilityActionsExample> {
+      return <AccessibilityActionsExample />;
     },
   },
   {

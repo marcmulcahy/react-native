@@ -342,6 +342,26 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   }
 }
 
+- (void)accessibilityIncrement
+{
+  if (_onAccessibilityAction) {
+    _onAccessibilityAction(@{
+      @"action": @"increment",
+      @"target": self.reactTag
+    });
+  }
+}
+
+- (void)accessibilityDecrement
+{
+  if (_onAccessibilityAction) {
+    _onAccessibilityAction(@{
+      @"action": @"decrement",
+      @"target": self.reactTag
+    });
+  }
+}
+
 - (NSString *)description
 {
   NSString *superDescription = super.description;
