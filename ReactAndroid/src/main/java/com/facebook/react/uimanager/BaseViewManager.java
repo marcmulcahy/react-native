@@ -114,7 +114,8 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
 
   @ReactProp(name = PROP_ACCESSIBILITY_LABEL)
   public void setAccessibilityLabel(T view, String accessibilityLabel) {
-    view.setContentDescription(accessibilityLabel);
+    view.setTag(R.id.accessibility_label, accessibilityLabel);
+    updateViewContentDescription(view);
   }
 
   @ReactProp(name = PROP_ACCESSIBILITY_COMPONENT_TYPE)
@@ -125,6 +126,7 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
   @ReactProp(name = PROP_ACCESSIBILITY_HINT)
   public void setAccessibilityHint(T view, String accessibilityHint) {
     view.setTag(R.id.accessibility_hint, accessibilityHint);
+    updateViewContentDescription(view);
   }
 
   @ReactProp(name = PROP_ACCESSIBILITY_ROLE)
@@ -132,24 +134,49 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
     if (accessibilityRole == null) {
       return;
     }
-
     view.setTag(R.id.accessibility_role, AccessibilityRole.fromValue(accessibilityRole));
   }
 
   @ReactProp(name = PROP_ACCESSIBILITY_STATES)
   public void setViewStates(T view, ReadableArray accessibilityStates) {
-    view.setSelected(false);
-    view.setEnabled(true);
     if (accessibilityStates == null) {
       return;
     }
+    view.setTag(R.id.accessibility_states, accessibilityStates);
     for (int i = 0; i < accessibilityStates.size(); i++) {
       String state = accessibilityStates.getString(i);
-      if (state.equals("selected")) {
-        view.setSelected(true);
-      } else if (state.equals("disabled")) {
-        view.setEnabled(false);
+      if (state.equals("on") || state.equals("off")) {
+        updateViewContentDescription(view);
       }
+    }
+  }
+
+  private void updateViewContentDescription(T view) {
+    final String accessibilityLabel = (String) view.getTag(R.id.accessibility_label);
+    final ReadableArray accessibilityStates = (ReadableArray) view.getTag(R.id.accessibility_states);
+    final String accessibilityHint = (String) view.getTag(R.id.accessibility_hint);
+    StringBuilder contentDescription = new StringBuilder();
+    if (accessibilityLabel != null) {
+      contentDescription.append(accessibilityLabel + ", ");
+    }
+    if (accessibilityStates != null) {
+      for (int i = 0; i < accessibilityStates.size(); i++) {
+        String state = accessibilityStates.getString(i);
+        switch(state) {
+          case "on":
+            contentDescription.append(view.getContext().getString(R.string.state_on_description) + ", ");
+            break;
+          case "off":
+            contentDescription.append(view.getContext().getString(R.string.state_off_description) + ", ");
+            break;
+        }
+      }
+    }
+    if (accessibilityHint != null) {
+      contentDescription.append(accessibilityHint + ", ");
+    }
+    if (contentDescription.length() > 0) {
+      view.setContentDescription(contentDescription.toString());
     }
   }
 

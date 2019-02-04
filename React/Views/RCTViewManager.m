@@ -150,24 +150,66 @@ RCT_CUSTOM_VIEW_PROPERTY(transform, CATransform3D, RCTView)
   view.layer.allowsEdgeAntialiasing = !CATransform3DIsIdentity(view.layer.transform);
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(accessibilityRole, UIAccessibilityTraits, RCTView)
+RCT_CUSTOM_VIEW_PROPERTY(accessibilityRole, NSString, RCTView)
 {
-  // This mask must be kept in sync with the AccessibilityRoles enum defined in ViewAccessibility.js and DeprecatedViewAccessibility.js
-  const UIAccessibilityTraits AccessibilityRolesMask = UIAccessibilityTraitNone | UIAccessibilityTraitButton | UIAccessibilityTraitLink | UIAccessibilityTraitSearchField | UIAccessibilityTraitImage | UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitStaticText | UIAccessibilityTraitAdjustable | UIAccessibilityTraitHeader | UIAccessibilityTraitSummaryElement;
-
-  UIAccessibilityTraits newTraits = json ? [RCTConvert UIAccessibilityTraits:json] : defaultView.accessibilityTraits;
-  UIAccessibilityTraits maskedTraits = newTraits & AccessibilityRolesMask;
-  view.reactAccessibilityElement.accessibilityTraits = (view.reactAccessibilityElement.accessibilityTraits & ~AccessibilityRolesMask) | maskedTraits;
+  NSString *role = json ? [RCTConvert NSString:json] : @"";
+  if ([role isEqualToString:@"button"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitButton;
+  }
+  else if ([role isEqualToString:@"link"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitLink;
+  }
+  else if ([role isEqualToString:@"header"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitHeader;
+  }
+  else if ([role isEqualToString:@"search"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSearchField;
+  }
+  else if ([role isEqualToString:@"image"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitImage;
+  }
+  else if ([role isEqualToString:@"keyboardkey"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitKeyboardKey;
+  }
+  else if ([role isEqualToString:@"text"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitStaticText;
+  }
+  else if ([role isEqualToString:@"summary"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSummaryElement;
+  }
+  else if ([role isEqualToString:@"adjustable"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable;
+  }
+  else {
+    ((RCTView *)view.reactAccessibilityElement).accessibilityRole = role;
+  }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(accessibilityStates, UIAccessibilityTraits, RCTView)
+RCT_CUSTOM_VIEW_PROPERTY(accessibilityStates, NSArray<NSString *>, RCTView)
 {
-  // This mask must be kept in sync with the AccessibilityStates enum defined in ViewAccessibility.js and DeprecatedViewAccessibility.js
-  const UIAccessibilityTraits AccessibilityStatesMask = UIAccessibilityTraitNotEnabled | UIAccessibilityTraitSelected;
+  NSArray<NSString *> *states = json ? [RCTConvert NSStringArray:json] : nil;
+  NSMutableArray *newStates = [NSMutableArray new];
 
-  UIAccessibilityTraits newTraits = json ? [RCTConvert UIAccessibilityTraits:json] : defaultView.accessibilityTraits;
-  UIAccessibilityTraits maskedTraits = newTraits & AccessibilityStatesMask;
-  view.reactAccessibilityElement.accessibilityTraits = (view.reactAccessibilityElement.accessibilityTraits & ~AccessibilityStatesMask) | maskedTraits;
+  if (!states) {
+    return;
+  }
+  for (NSString *state in states) {
+    if ([state isEqualToString:@"selected"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSelected;
+    }
+    else if ([state isEqualToString:@"disabled"]) {
+      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitNotEnabled;
+    }
+    else {
+      [newStates addObject:state];
+    }
+    if (states.count > 0) {
+      ((RCTView *)view.reactAccessibilityElement).accessibilityStates = newStates;
+    }
+    else {
+      ((RCTView *)view.reactAccessibilityElement).accessibilityStates = nil;
+    }
+  }
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(pointerEvents, RCTPointerEvents, RCTView)

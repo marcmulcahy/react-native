@@ -10,63 +10,77 @@ import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.R;
 import java.util.Locale;
 import javax.annotation.Nullable;
 
 /**
- * Utility class that handles the addition of a "role" for accessibility to either a View or
- * AccessibilityNodeInfo.
+ * Utility class that handles the addition of a "role" for accessibility to
+ * either a View or AccessibilityNodeInfo.
  */
 
 public class AccessibilityDelegateUtil {
 
   /**
-   * These roles are defined by Google's TalkBack screen reader, and this list should be kept up to
-   * date with their implementation. Details can be seen in their source code here:
+   * These roles are defined by Google's TalkBack screen reader, and this list
+   * should be kept up to date with their implementation. Details can be seen in
+   * their source code here:
    *
-   * <p>https://github.com/google/talkback/blob/master/utils/src/main/java/Role.java
+   * <p>
+   * https://github.com/google/talkback/blob/master/utils/src/main/java/Role.java
    */
 
   public enum AccessibilityRole {
-    NONE,
-    BUTTON,
-    LINK,
-    SEARCH,
-    IMAGE,
-    IMAGEBUTTON,
-    KEYBOARDKEY,
-    TEXT,
-    ADJUSTABLE,
-    SUMMARY,
-    HEADER;
+    NONE, BUTTON, LINK, SEARCH, IMAGE, IMAGEBUTTON, KEYBOARDKEY, TEXT, ADJUSTABLE, SUMMARY, HEADER, ALERT, CHECKBOX,
+    COMBOBOX, EDITABLETEXT, MENU, MENUBAR, MENUITEM, PROGRESSBAR, RADIOBUTTON, RADIOGROUP, SCROLLBAR, SPINBUTTON,
+    SWITCH, TAB, TABLIST, TIMER, TOOLBAR;
 
     public static String getValue(AccessibilityRole role) {
       switch (role) {
-        case NONE:
-          return null;
-        case BUTTON:
-          return "android.widget.Button";
-        case LINK:
-          return "android.widget.ViewGroup";
-        case SEARCH:
-          return "android.widget.EditText";
-        case IMAGE:
-          return "android.widget.ImageView";
-        case IMAGEBUTTON:
-          return "android.widget.ImageView";
-        case KEYBOARDKEY:
-          return "android.inputmethodservice.Keyboard$Key";
-        case TEXT:
-          return "android.widget.ViewGroup";
-        case ADJUSTABLE:
-          return "android.widget.SeekBar";
-        case SUMMARY:
-          return "android.widget.ViewGroup";
-        case HEADER:
-          return "android.widget.ViewGroup";
-        default:
-          throw new IllegalArgumentException("Invalid accessibility role value: " + role);
+      case NONE:
+        return null;
+      case BUTTON:
+        return "android.widget.Button";
+      case EDITABLETEXT:
+      case SEARCH:
+        return "android.widget.EditText";
+      case IMAGE:
+        return "android.widget.ImageView";
+      case IMAGEBUTTON:
+        return "android.widget.ImageButon";
+      case KEYBOARDKEY:
+        return "android.inputmethodservice.Keyboard$Key";
+      case TEXT:
+        return "android.widget.TextView";
+      case ADJUSTABLE:
+        return "android.widget.SeekBar";
+      case SWITCH:
+        return "android.widget.Switch";
+      case CHECKBOX:
+        return "android.widget.CheckBox";
+      case RADIOBUTTON:
+        return "android.widget.RadioButton";
+      case SPINBUTTON:
+        return "android.widget.SpinButton";
+      case LINK:
+      case SUMMARY:
+      case HEADER:
+      case ALERT:
+      case COMBOBOX:
+      case MENU:
+      case MENUBAR:
+      case MENUITEM:
+      case PROGRESSBAR:
+      case RADIOGROUP:
+      case SCROLLBAR:
+      case TAB:
+      case TABLIST:
+      case TIMER:
+      case TOOLBAR:
+        return "android.view.View";
+      default:
+        throw new IllegalArgumentException("Invalid accessibility role value: " + role);
       }
     }
 
@@ -85,31 +99,46 @@ public class AccessibilityDelegateUtil {
   }
 
   public static void setDelegate(final View view) {
-    final String accessibilityHint = (String) view.getTag(R.id.accessibility_hint);
     final AccessibilityRole accessibilityRole = (AccessibilityRole) view.getTag(R.id.accessibility_role);
-    // if a view already has an accessibility delegate, replacing it could cause problems,
+    // if a view already has an accessibility delegate, replacing it could cause
+    // problems,
     // so leave it alone.
-    if (!ViewCompat.hasAccessibilityDelegate(view) &&
-      (accessibilityHint != null || accessibilityRole != null)) {
-      ViewCompat.setAccessibilityDelegate(
-        view,
-        new AccessibilityDelegateCompat() {
-          @Override
-          public void onInitializeAccessibilityNodeInfo(
-            View host, AccessibilityNodeInfoCompat info) {
-            super.onInitializeAccessibilityNodeInfo(host, info);
-            setRole(info, accessibilityRole, view.getContext());
-            if (!(accessibilityHint == null)) {
-              String contentDescription=(String)info.getContentDescription();
-              if (contentDescription != null) {
-                contentDescription = contentDescription + ", " + accessibilityHint;
-                info.setContentDescription(contentDescription);
-              } else {
-                info.setContentDescription(accessibilityHint);
-              }
-            }
+    if (!ViewCompat.hasAccessibilityDelegate(view)
+        && (accessibilityRole != null || view.getTag(R.id.accessibility_states) != null)) {
+      ViewCompat.setAccessibilityDelegate(view, new AccessibilityDelegateCompat() {
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+          super.onInitializeAccessibilityNodeInfo(host, info);
+          setRole(info, accessibilityRole, view.getContext());
+          // states are changable.
+          ReadableArray accessibilityStates = (ReadableArray) view.getTag(R.id.accessibility_states);
+          if (accessibilityStates != null) {
+            setState(info, accessibilityStates, view.getContext());
           }
-        });
+        }
+      });
+    }
+  }
+
+  public static void setState(AccessibilityNodeInfoCompat info, ReadableArray accessibilityStates, Context context) {
+    for (int i = 0; i < accessibilityStates.size(); i++) {
+      String state = accessibilityStates.getString(i);
+      switch (state) {
+      case "selected":
+        info.setSelected(true);
+        break;
+      case "disabled":
+        info.setEnabled(false);
+        break;
+      case "checked":
+        info.setCheckable(true);
+        info.setChecked(true);
+        break;
+      case "unchecked":
+        info.setCheckable(true);
+        info.setChecked(false);
+        break;
+      }
     }
   }
 
@@ -117,7 +146,7 @@ public class AccessibilityDelegateUtil {
    * Strings for setting the Role Description in english
    */
 
-  //TODO: Eventually support for other languages on talkback
+  // TODO: Eventually support for other languages on talkback
 
   public static void setRole(AccessibilityNodeInfoCompat nodeInfo, AccessibilityRole role, final Context context) {
     if (role == null) {
@@ -135,10 +164,61 @@ public class AccessibilityDelegateUtil {
         nodeInfo.setRoleDescription(context.getString(R.string.image_description));
       }
       if (role.equals(AccessibilityRole.IMAGEBUTTON)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.image_button_description));
+        nodeInfo.setRoleDescription(context.getString(R.string.imagebutton_description));
       }
       if (role.equals(AccessibilityRole.ADJUSTABLE)) {
         nodeInfo.setRoleDescription(context.getString(R.string.adjustable_description));
+      }
+      if (role.equals(AccessibilityRole.ALERT)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.alert_description));
+      }
+      if (role.equals(AccessibilityRole.CHECKBOX)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.checkbox_description));
+      }
+      if (role.equals(AccessibilityRole.COMBOBOX)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.combobox_description));
+      }
+      if (role.equals(AccessibilityRole.EDITABLETEXT)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.editabletext_description));
+      }
+      if (role.equals(AccessibilityRole.MENU)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.menu_description));
+      }
+      if (role.equals(AccessibilityRole.MENUBAR)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.menubar_description));
+      }
+      if (role.equals(AccessibilityRole.MENUITEM)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.menuitem_description));
+      }
+      if (role.equals(AccessibilityRole.PROGRESSBAR)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.progressbar_description));
+      }
+      if (role.equals(AccessibilityRole.RADIOBUTTON)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.radiobutton_description));
+      }
+      if (role.equals(AccessibilityRole.RADIOGROUP)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.radiogroup_description));
+      }
+      if (role.equals(AccessibilityRole.SCROLLBAR)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.scrollbar_description));
+      }
+      if (role.equals(AccessibilityRole.SPINBUTTON)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.spinbutton_description));
+      }
+      if (role.equals(AccessibilityRole.SWITCH)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.switch_description));
+      }
+      if (role.equals(AccessibilityRole.TAB)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.tab_description));
+      }
+      if (role.equals(AccessibilityRole.TABLIST)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.tablist_description));
+      }
+      if (role.equals(AccessibilityRole.TIMER)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.timer_description));
+      }
+      if (role.equals(AccessibilityRole.TOOLBAR)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.toolbar_description));
       }
     }
     if (role.equals(AccessibilityRole.IMAGEBUTTON)) {
