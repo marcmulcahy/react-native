@@ -11,7 +11,7 @@
 
 const React = require('react');
 const ReactNative = require('react-native');
-const {AccessibilityInfo, Text, View, TouchableOpacity, Alert} = ReactNative;
+const {AccessibilityInfo, Text, View, TouchableOpacity, Alert, UIManager, findNodeHandle, Platform} = ReactNative;
 
 const RNTesterBlock = require('./RNTesterBlock');
 
@@ -126,6 +126,182 @@ class AccessibilityExample extends React.Component {
   }
 }
 
+class CheckboxExample extends React.Component {
+  state = {
+    checkboxState: 'checked',
+  };
+
+  _onCheckboxPress = () => {
+    const checkboxState = this.state.checkboxState === 'checked' ?
+      'unchecked' : 'checked'
+
+    this.setState({
+      checkboxState: checkboxState
+    });
+
+    if (Platform.OS === 'android') {
+      UIManager.sendAccessibilityEvent(
+        findNodeHandle(this),
+        UIManager.AccessibilityEventTypes.typeViewClicked);
+    }
+  };
+
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={this._onCheckboxPress}
+        accessibilityLabel="element 2"
+        accessibilityRole="checkbox"
+        accessibilityStates={[this.state.checkboxState]}
+        accessibilityHint="click me to change state">
+        <Text>Checkbox example</Text>
+      </TouchableOpacity>
+    );
+  }
+}
+
+class StateOnOffExample extends React.Component {
+  state = {
+    elementState: 'on',
+  };
+
+  _onElementPress = () => {
+    const elementState = this.state.elementState === 'on' ?
+      'off' : 'on'
+
+    this.setState({
+      elementState: elementState
+    });
+
+    if (Platform.OS === 'android') {
+      UIManager.sendAccessibilityEvent(
+        findNodeHandle(this),
+        UIManager.AccessibilityEventTypes.typeViewClicked);
+    }
+  };
+
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={this._onElementPress}
+        accessibilityLabel="element 18"
+        accessibilityStates={[this.state.elementState]}
+        accessibilityHint="click me to change state">
+        <Text>State on/off example</Text>
+      </TouchableOpacity>
+    );
+  }
+}
+
+class AccessibilityRoleAndStateExample extends React.Component<{}> {
+  render() {
+    return (
+      <View>
+        <View
+          accessibilityLabel="element 1"
+          accessibilityRole="alert"
+          accessible={true}>
+          <Text>Alert example</Text>
+        </View>
+        <CheckboxExample/>
+        <View
+          accessibilityLabel="element 3"
+          accessibilityRole="combobox"
+          accessible={true}>
+          <Text>Combobox example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 4"
+          accessibilityRole="editabletext"
+          accessible={true}>
+          <Text>Editable text example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 5"
+          accessibilityRole="menu"
+          accessible={true}>
+          <Text>Menu example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 6"
+          accessibilityRole="menubar"
+          accessible={true}>
+          <Text>Menu bar example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 7"
+          accessibilityRole="menuitem"
+          accessible={true}>
+          <Text>Menu item example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 8"
+          accessibilityRole="progressbar"
+          accessible={true}>
+          <Text>Progress bar example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 9"
+          accessibilityRole="radiobutton"
+          accessible={true}>
+          <Text>Radio button example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 10"
+          accessibilityRole="radiogroup"
+          accessible={true}>
+          <Text>Radio group example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 11"
+          accessibilityRole="scrollbar"
+          accessible={true}>
+          <Text>Scrollbar example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 12"
+          accessibilityRole="spinbutton"
+          accessible={true}>
+          <Text>Spin button example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 13"
+          accessibilityRole="switch"
+          accessibilityStates={["checked"]}
+          accessible={true}>
+          <Text>Switch example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 14"
+          accessibilityRole="tab"
+          accessible={true}>
+          <Text>Tab example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 15"
+          accessibilityRole="tablist"
+          accessible={true}>
+          <Text>Tab list example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 16"
+          accessibilityRole="timer"
+          accessible={true}>
+          <Text>Timer example</Text>
+        </View>
+        <View
+          accessibilityLabel="element 17"
+          accessibilityRole="toolbar"
+          accessible={true}>
+          <Text>Toolbar example</Text>
+        </View>
+        <StateOnOffExample/>
+      </View>
+    );
+  }
+}
+
+
 class ScreenReaderStatusExample extends React.Component<{}> {
   state = {
     screenReaderEnabled: false,
@@ -175,6 +351,12 @@ exports.examples = [
     title: 'Accessibility elements',
     render(): React.Element<typeof AccessibilityExample> {
       return <AccessibilityExample />;
+    },
+  },
+  {
+    title: 'New accessibility roles and states',
+    render(): React.Element<typeof AccessibilityRoleAndStateExamples> {
+      return <AccessibilityRoleAndStateExample />;
     },
   },
   {
