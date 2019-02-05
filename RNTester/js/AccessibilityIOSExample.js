@@ -22,19 +22,32 @@ class AccessibilityIOSExample extends React.Component<Props> {
     return (
       <RNTesterBlock title='Accessibility iOS APIs'>
         <View
-          onAccessibilityTap={() =>
+            onAccessibilityAction={(event) => {
+            if (event.nativeEvent.actionName == 'activate') {
             Alert.alert('Alert', 'onAccessibilityTap success')
+            }
           }
+            }
           accessible={true}>
           <Text>Accessibility normal tap example</Text>
         </View>
         <View
-          onMagicTap={() => Alert.alert('Alert', 'onMagicTap success')}
+            onAccessibilityAction={(event) => {
+            if (event.nativeEvent.actionName == 'magicTap') {
+            Alert.alert('Alert', 'onMagicTap success')
+            }
+            }
+            }
           accessible={true}>
           <Text>Accessibility magic tap example</Text>
         </View>
         <View
-          onAccessibilityEscape={() => alert('onAccessibilityEscape success')}
+            onAccessibilityAction={(event) => {
+            if (event.nativeEvent.actionName == 'escape') {
+            alert('onAccessibilityEscape success')
+            }
+            }
+            }
           accessible={true}>
           <Text>Accessibility escape example</Text>
         </View>

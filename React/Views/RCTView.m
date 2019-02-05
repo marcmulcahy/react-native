@@ -161,8 +161,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   }
 
   NSMutableArray *actions = [NSMutableArray array];
-  for (NSString *action in _accessibilityActions) {
-    [actions addObject:[[UIAccessibilityCustomAction alloc] initWithName:action
+  for (NSDictionary *action in _accessibilityActions) {
+    [actions addObject:[[UIAccessibilityCustomAction alloc] initWithName:action[@"label"]
                                                                   target:self
                                                                 selector:@selector(didActivateAccessibilityCustomAction:)]];
   }
@@ -172,13 +172,15 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (BOOL)didActivateAccessibilityCustomAction:(UIAccessibilityCustomAction *)action
 {
-  if (!_onAccessibilityAction) {
+  if (!_onAccessibilityAction || !_accessibilityActionsMap) {
     return NO;
   }
+  
+  // iOS defines the name as the localized label, so use our map to convert this back to the non-localized action namne when passing to JS. This allows for standard action names across platforms.
 
   _onAccessibilityAction(@{
-    @"action": action.name,
-    @"target": self.reactTag
+    @"actionName": _accessibilityActionsMap[action.name],
+    @"actionTarget": self.reactTag
   });
 
   return YES;
@@ -314,7 +316,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (BOOL)accessibilityActivate
 {
-  if (_onAccessibilityTap) {
+  if (_onAccessibilityAction) {
+    _onAccessibilityAction(@{
+                             @"actionName": @"activate",
+                             @"actionTarget": self.reactTag
+                             });
+    return YES;
+  }
+  else if (_onAccessibilityTap) {
     _onAccessibilityTap(nil);
     return YES;
   } else {
@@ -324,7 +333,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (BOOL)accessibilityPerformMagicTap
 {
-  if (_onMagicTap) {
+  if (_onAccessibilityAction) {
+    _onAccessibilityAction(@{
+                             @"actionName": @"magicTap",
+                             @"actionTarget": self.reactTag
+                             });
+    return YES;
+  }
+  else if (_onMagicTap) {
     _onMagicTap(nil);
     return YES;
   } else {
@@ -334,7 +350,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (BOOL)accessibilityPerformEscape
 {
-  if (_onAccessibilityEscape) {
+  if (_onAccessibilityAction) {
+    _onAccessibilityAction(@{
+                             @"actionName": @"escape",
+                             @"actionTarget": self.reactTag
+                             });
+    return YES;
+  }
+  else if (_onAccessibilityEscape) {
     _onAccessibilityEscape(nil);
     return YES;
   } else {
@@ -346,8 +369,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 {
   if (_onAccessibilityAction) {
     _onAccessibilityAction(@{
-      @"action": @"increment",
-      @"target": self.reactTag
+      @"actionName": @"increment",
+      @"actionTarget": self.reactTag
     });
   }
 }
@@ -356,8 +379,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 {
   if (_onAccessibilityAction) {
     _onAccessibilityAction(@{
-      @"action": @"decrement",
-      @"target": self.reactTag
+      @"actionName": @"decrement",
+      @"actionTarget": self.reactTag
     });
   }
 }

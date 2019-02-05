@@ -126,7 +126,17 @@ RCT_EXPORT_VIEW_PROPERTY(nativeID, NSString)
 
 // Acessibility related properties
 RCT_REMAP_VIEW_PROPERTY(accessible, reactAccessibilityElement.isAccessibilityElement, BOOL)
-RCT_REMAP_VIEW_PROPERTY(accessibilityActions, reactAccessibilityElement.accessibilityActions, NSArray<NSString *>)
+RCT_CUSTOM_VIEW_PROPERTY(accessibilityActions, NSArray<NSDictionary *> *, RCTView)
+{
+    view.accessibilityActions = json ? [RCTConvert NSDictionaryArray:json] : nil;
+  if (view.accessibilityActions) {
+    NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
+    for (NSDictionary *action in view.accessibilityActions) {
+      map[action[@"label"]] = action[@"name"];
+    }
+          view.accessibilityActionsMap = [map copy];
+  }
+}
 RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, reactAccessibilityElement.accessibilityLabel, NSString)
 RCT_REMAP_VIEW_PROPERTY(accessibilityHint, reactAccessibilityElement.accessibilityHint, NSString)
 RCT_REMAP_VIEW_PROPERTY(accessibilityTraits, reactAccessibilityElement.accessibilityTraits, UIAccessibilityTraits)

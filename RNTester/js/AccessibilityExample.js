@@ -407,9 +407,13 @@ class AccessibilityActionsExample extends React.Component {
         <RNTesterBlock title="View with multiple actions">
           <View
             accessible={true}
-            accessibilityActions={['cut', 'copy', 'paste']}
+            accessibilityActions={[
+                                   {name : 'cut', label : 'cut label'},
+                                   {name : 'copy', label : 'copy label'},
+                                   {name: 'paste', label: 'paste label'}
+                                   ]}
             onAccessibilityAction={(event) =>
-              {switch(event.nativeEvent.action) {
+              {switch(event.nativeEvent.actionName) {
                 case 'cut':
                   Alert.alert('Alert', 'cut action success')
                   break;
@@ -421,7 +425,7 @@ class AccessibilityActionsExample extends React.Component {
                   break;
               }}
             }>
-            <Text>This view support many actions.</Text>
+            <Text>This view supports many actions.</Text>
           </View>
         </RNTesterBlock>
 
@@ -430,7 +434,7 @@ class AccessibilityActionsExample extends React.Component {
             accessible={true}
             accessibilityRole="adjustable"
             onAccessibilityAction={(event) =>
-              {switch(event.nativeEvent.action) {
+              {switch(event.nativeEvent.actionName) {
                 case 'increment':
                   Alert.alert('Alert', 'increment action success')
                   break;
