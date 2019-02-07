@@ -433,6 +433,10 @@ class AccessibilityActionsExample extends React.Component {
           <View
             accessible={true}
             accessibilityRole="adjustable"
+            accessibilityActions={[
+                                    {name : 'increment'},
+                                    {name : 'decrement'},
+                                  ]}
             onAccessibilityAction={(event) =>
               {switch(event.nativeEvent.actionName) {
                 case 'increment':

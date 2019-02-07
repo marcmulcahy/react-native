@@ -30,7 +30,6 @@ type DirectEventProps = $ReadOnly<{|
    * When `accessible` is true, the system will try to invoke this function
    * when the user performs an accessibility custom action.
    *
-   * @platform ios
    */
   onAccessibilityAction?: ?(event: SyntheticEvent) => void,
 
@@ -288,13 +287,6 @@ type AndroidViewProps = $ReadOnly<{|
 
 type IOSViewProps = $ReadOnly<{|
   /**
-   * Provides an array of custom actions available for accessibility.
-   *
-   * @platform ios
-   */
-  accessibilityActions?: ?$ReadOnlyArray<string>,
-
-  /**
    * Prevents view from being inverted if set to true and color inversion is turned on.
    *
    * @platform ios
@@ -397,6 +389,12 @@ export type ViewProps = $ReadOnly<{|
    * Indicates to accessibility services that UI Component is in a specific State.
    */
   accessibilityStates?: ?AccessibilityStates,
+
+  /**
+   * Provides an array of custom actions available for accessibility.
+   *
+   */
+  accessibilityActions?: ?$ReadOnlyArray<object>,
 
   /**
    * Used to locate this view in end-to-end tests.
