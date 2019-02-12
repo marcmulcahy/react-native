@@ -28,7 +28,10 @@ class AccessibilityIOSExample extends React.Component<Props> {
             }
           }
             }
-          accessible={true}>
+          accessible={true}
+            accessibilityActions={[
+                                   {name : "activate"}
+                                   ]}>
           <Text>Accessibility normal tap example</Text>
         </View>
         <View
@@ -38,7 +41,10 @@ class AccessibilityIOSExample extends React.Component<Props> {
             }
             }
             }
-          accessible={true}>
+          accessible={true}
+            accessibilityActions={[
+                                   {name : "magicTap"}
+                                   ]}>
           <Text>Accessibility magic tap example</Text>
         </View>
         <View
@@ -48,7 +54,10 @@ class AccessibilityIOSExample extends React.Component<Props> {
             }
             }
             }
-          accessible={true}>
+          accessible={true}
+            accessibilityActions={[
+                                   {name : "escape"}
+                                   ]}>
           <Text>Accessibility escape example</Text>
         </View>
         <View accessibilityElementsHidden={true}>

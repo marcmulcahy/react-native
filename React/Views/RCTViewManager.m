@@ -129,13 +129,6 @@ RCT_REMAP_VIEW_PROPERTY(accessible, reactAccessibilityElement.isAccessibilityEle
 RCT_CUSTOM_VIEW_PROPERTY(accessibilityActions, NSArray<NSDictionary *> *, RCTView)
 {
     view.accessibilityActions = json ? [RCTConvert NSDictionaryArray:json] : nil;
-  if (view.accessibilityActions) {
-    NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
-    for (NSDictionary *action in view.accessibilityActions) {
-      map[action[@"label"]] = action[@"name"];
-    }
-          view.accessibilityActionsMap = [map copy];
-  }
 }
 RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, reactAccessibilityElement.accessibilityLabel, NSString)
 RCT_REMAP_VIEW_PROPERTY(accessibilityHint, reactAccessibilityElement.accessibilityHint, NSString)

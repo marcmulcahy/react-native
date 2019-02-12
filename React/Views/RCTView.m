@@ -99,6 +99,8 @@ static NSString *RCTRecursiveAccessibilityLabel(UIView *view)
 @implementation RCTView
 {
   UIColor *_backgroundColor;
+  NSMutableDictionary *accessibilityActionsNameMap;
+  NSMutableDictionary *accessibilityActionsLabelMap;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -154,17 +156,38 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   return RCTRecursiveAccessibilityLabel(self);
 }
 
+-(void)setAccessibilityActions:(NSArray *)actions
+{
+  if (!actions || !actions.count) {
+    return;
+  }
+  _accessibilityActions = [NSMutableArray array];
+  accessibilityActionsNameMap = [[NSMutableDictionary alloc] init];
+  accessibilityActionsLabelMap = [[NSMutableDictionary alloc] init];
+  for (NSDictionary *action in actions) {
+    if (action[@"name"]) {
+      accessibilityActionsNameMap[action[@"name"]] = action;
+    }
+    if (action[@"label"]) {
+      accessibilityActionsLabelMap[action[@"label"]] = action;
+    }
+  }
+  _accessibilityActions = [actions copy];
+}
+
 - (NSArray <UIAccessibilityCustomAction *> *)accessibilityCustomActions
 {
-  if (!_accessibilityActions.count) {
+  if (!_accessibilityActions || !_accessibilityActions.count) {
     return nil;
   }
 
   NSMutableArray *actions = [NSMutableArray array];
   for (NSDictionary *action in _accessibilityActions) {
-    [actions addObject:[[UIAccessibilityCustomAction alloc] initWithName:action[@"label"]
-                                                                  target:self
-                                                                selector:@selector(didActivateAccessibilityCustomAction:)]];
+    if (action[@"label"]) {
+      [actions addObject:[[UIAccessibilityCustomAction alloc] initWithName:action[@"label"]
+                                                                    target:self
+                                                                  selector:@selector(didActivateAccessibilityCustomAction:)]];
+    }
   }
 
   return [actions copy];
@@ -172,17 +195,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (BOOL)didActivateAccessibilityCustomAction:(UIAccessibilityCustomAction *)action
 {
-  if (!_onAccessibilityAction || !_accessibilityActionsMap) {
+  if (!_onAccessibilityAction || !accessibilityActionsLabelMap) {
     return NO;
   }
-  
+
   // iOS defines the name as the localized label, so use our map to convert this back to the non-localized action namne when passing to JS. This allows for standard action names across platforms.
 
-  _onAccessibilityAction(@{
-    @"actionName": _accessibilityActionsMap[action.name],
+  NSDictionary *actionObject = accessibilityActionsLabelMap[action.name];
+  if (actionObject) {
+   _onAccessibilityAction(@{
+    @"actionName": actionObject[@"name"],
     @"actionTarget": self.reactTag
   });
-
+  }
   return YES;
 }
 
@@ -314,75 +339,69 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
   return NO;
 }
 
-- (BOOL)accessibilityActivate
+- (BOOL)performAccessibilityAction:(NSString *) name
 {
-  if (_onAccessibilityAction) {
+  if (_onAccessibilityAction && accessibilityActionsNameMap[name]) {
     _onAccessibilityAction(@{
-                             @"actionName": @"activate",
-                             @"actionTarget": self.reactTag
+                             @"actionName" : name,
+                             @"actionTarget" : self.reactTag
                              });
     return YES;
+  }
+  return NO;
+}
+
+- (BOOL)accessibilityActivate
+{
+  if ([self performAccessibilityAction:@"activate"]) {
+    return YES;
+    
   }
   else if (_onAccessibilityTap) {
     _onAccessibilityTap(nil);
     return YES;
-  } else {
-    return NO;
   }
+       else {
+    return NO;
+       }
 }
 
 - (BOOL)accessibilityPerformMagicTap
 {
-  if (_onAccessibilityAction) {
-    _onAccessibilityAction(@{
-                             @"actionName": @"magicTap",
-                             @"actionTarget": self.reactTag
-                             });
+  if ([self performAccessibilityAction:@"magicTap"]) {
     return YES;
   }
   else if (_onMagicTap) {
     _onMagicTap(nil);
     return YES;
-  } else {
+  }
+  else {
     return NO;
   }
 }
 
 - (BOOL)accessibilityPerformEscape
 {
-  if (_onAccessibilityAction) {
-    _onAccessibilityAction(@{
-                             @"actionName": @"escape",
-                             @"actionTarget": self.reactTag
-                             });
+  if ([self performAccessibilityAction:@"escape"]) {
     return YES;
   }
   else if (_onAccessibilityEscape) {
     _onAccessibilityEscape(nil);
     return YES;
-  } else {
+  }
+  else {
     return NO;
   }
 }
 
 - (void)accessibilityIncrement
 {
-  if (_onAccessibilityAction) {
-    _onAccessibilityAction(@{
-      @"actionName": @"increment",
-      @"actionTarget": self.reactTag
-    });
-  }
+  [self performAccessibilityAction:@"increment"];
 }
 
 - (void)accessibilityDecrement
 {
-  if (_onAccessibilityAction) {
-    _onAccessibilityAction(@{
-      @"actionName": @"decrement",
-      @"actionTarget": self.reactTag
-    });
-  }
+  [self performAccessibilityAction:@"decrement"];
 }
 
 - (NSString *)description
