@@ -9,12 +9,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewParent;
+
+import java.util.HashMap;
+
 import com.facebook.react.R;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.AccessibilityDelegateUtil.AccessibilityRole;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.util.ReactFindViewUtil;
-import java.util.Locale;
 
 /**
  * Base class that should be suitable for the majority of subclasses of {@link ViewManager}.
@@ -55,6 +57,15 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
   private static MatrixMathHelper.MatrixDecompositionContext sMatrixDecompositionContext =
       new MatrixMathHelper.MatrixDecompositionContext();
   private static double[] sTransformDecompositionArray = new double[16];
+
+  public static final HashMap<String, Integer> sStateDescription= new HashMap<String, Integer>();
+  static {
+      sStateDescription.put("on", R.string.state_on_description);
+      sStateDescription.put("off", R.string.state_off_description);
+      sStateDescription.put("busy", R.string.state_busy_description);
+      sStateDescription.put("expanded", R.string.state_expanded_description);
+      sStateDescription.put("collapsed", R.string.state_collapsed_description);
+  }
 
   @ReactProp(name = PROP_BACKGROUND_COLOR, defaultInt = Color.TRANSPARENT, customType = "Color")
   public void setBackgroundColor(T view, int backgroundColor) {
@@ -145,7 +156,7 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
     view.setTag(R.id.accessibility_states, accessibilityStates);
     for (int i = 0; i < accessibilityStates.size(); i++) {
       String state = accessibilityStates.getString(i);
-      if (state.equals("on") || state.equals("off")) {
+      if (sStateDescription.containsKey(state)) {
         updateViewContentDescription(view);
       }
     }
@@ -162,13 +173,8 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
     if (accessibilityStates != null) {
       for (int i = 0; i < accessibilityStates.size(); i++) {
         String state = accessibilityStates.getString(i);
-        switch(state) {
-          case "on":
-            contentDescription.append(view.getContext().getString(R.string.state_on_description) + ", ");
-            break;
-          case "off":
-            contentDescription.append(view.getContext().getString(R.string.state_off_description) + ", ");
-            break;
+        if (sStateDescription.containsKey(state)) {
+          contentDescription.append(view.getContext().getString(sStateDescription.get(state)) + ", ");
         }
       }
     }

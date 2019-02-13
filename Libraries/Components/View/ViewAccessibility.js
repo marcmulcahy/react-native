@@ -72,4 +72,13 @@ export type AccessibilityRole =
 
 
 // This must be kept in sync with the AccessibilityStatesMask in RCTViewManager.m
-export type AccessibilityStates = $ReadOnlyArray<'disabled' | 'selected' | 'on' | 'off' | 'checked' | 'unchecked'>;
+export type AccessibilityStates = $ReadOnlyArray<'disabled'
+                                                | 'selected'
+                                                | 'on'
+                                                | 'off'
+                                                | 'checked'
+                                                | 'unchecked'
+                                                | 'busy'
+                                                | 'expanded'
+                                                | 'collapsed'
+                                                | 'hasPopup'>;

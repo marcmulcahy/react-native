@@ -193,6 +193,39 @@ class StateOnOffExample extends React.Component {
   }
 }
 
+class ExpandableElementExample extends React.Component {
+  state = {
+    expandState: 'collapsed',
+  };
+
+  _onElementPress = () => {
+    const expandState = this.state.expandState === 'collapsed' ?
+      'expanded' : 'collapsed'
+
+    this.setState({
+      expandState: expandState
+    });
+
+    if (Platform.OS === 'android') {
+      UIManager.sendAccessibilityEvent(
+        findNodeHandle(this),
+        UIManager.AccessibilityEventTypes.typeViewClicked);
+    }
+  };
+
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={this._onElementPress}
+        accessibilityLabel="element 20"
+        accessibilityStates={[this.state.expandState]}
+        accessibilityHint="click me to change state">
+        <Text>Expandable element example</Text>
+      </TouchableOpacity>
+    );
+  }
+}
+
 class AccessibilityRoleAndStateExample extends React.Component<{}> {
   render() {
     return (
@@ -219,6 +252,7 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
         <View
           accessibilityLabel="element 5"
           accessibilityRole="menu"
+          accessibilityStates={["hasPopup"]}
           accessible={true}>
           <Text>Menu example</Text>
         </View>
@@ -270,6 +304,7 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
           accessibilityStates={["checked"]}
           accessible={true}>
           <Text>Switch example</Text>
+          <Text style={{color: 'gray'}}>Talkback announces the text as the switch's state.</Text>
         </View>
         <View
           accessibilityLabel="element 14"
@@ -296,11 +331,17 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
           <Text>Toolbar example</Text>
         </View>
         <StateOnOffExample/>
+        <View
+          accessibilityLabel="element 19"
+          accessibilityStates={["busy"]}
+          accessible={true}>
+          <Text>State busy example</Text>
+        </View>
+        <ExpandableElementExample/>
       </View>
     );
   }
 }
-
 
 class ScreenReaderStatusExample extends React.Component<{}> {
   state = {

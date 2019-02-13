@@ -38,8 +38,6 @@ public class AccessibilityDelegateUtil {
 
     public static String getValue(AccessibilityRole role) {
       switch (role) {
-      case NONE:
-        return null;
       case BUTTON:
         return "android.widget.Button";
       case EDITABLETEXT:
@@ -63,6 +61,7 @@ public class AccessibilityDelegateUtil {
         return "android.widget.RadioButton";
       case SPINBUTTON:
         return "android.widget.SpinButton";
+      case NONE:
       case LINK:
       case SUMMARY:
       case HEADER:
@@ -138,6 +137,9 @@ public class AccessibilityDelegateUtil {
         info.setCheckable(true);
         info.setChecked(false);
         break;
+      case "hasPopup":
+        info.setCanOpenPopup(true);
+        break;
       }
     }
   }
@@ -165,21 +167,13 @@ public class AccessibilityDelegateUtil {
       }
       if (role.equals(AccessibilityRole.IMAGEBUTTON)) {
         nodeInfo.setRoleDescription(context.getString(R.string.imagebutton_description));
-      }
-      if (role.equals(AccessibilityRole.ADJUSTABLE)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.adjustable_description));
+        nodeInfo.setClickable(true);
       }
       if (role.equals(AccessibilityRole.ALERT)) {
         nodeInfo.setRoleDescription(context.getString(R.string.alert_description));
       }
-      if (role.equals(AccessibilityRole.CHECKBOX)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.checkbox_description));
-      }
       if (role.equals(AccessibilityRole.COMBOBOX)) {
         nodeInfo.setRoleDescription(context.getString(R.string.combobox_description));
-      }
-      if (role.equals(AccessibilityRole.EDITABLETEXT)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.editabletext_description));
       }
       if (role.equals(AccessibilityRole.MENU)) {
         nodeInfo.setRoleDescription(context.getString(R.string.menu_description));
@@ -193,9 +187,6 @@ public class AccessibilityDelegateUtil {
       if (role.equals(AccessibilityRole.PROGRESSBAR)) {
         nodeInfo.setRoleDescription(context.getString(R.string.progressbar_description));
       }
-      if (role.equals(AccessibilityRole.RADIOBUTTON)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.radiobutton_description));
-      }
       if (role.equals(AccessibilityRole.RADIOGROUP)) {
         nodeInfo.setRoleDescription(context.getString(R.string.radiogroup_description));
       }
@@ -204,9 +195,6 @@ public class AccessibilityDelegateUtil {
       }
       if (role.equals(AccessibilityRole.SPINBUTTON)) {
         nodeInfo.setRoleDescription(context.getString(R.string.spinbutton_description));
-      }
-      if (role.equals(AccessibilityRole.SWITCH)) {
-        nodeInfo.setRoleDescription(context.getString(R.string.switch_description));
       }
       if (role.equals(AccessibilityRole.TAB)) {
         nodeInfo.setRoleDescription(context.getString(R.string.tab_description));
@@ -220,9 +208,12 @@ public class AccessibilityDelegateUtil {
       if (role.equals(AccessibilityRole.TOOLBAR)) {
         nodeInfo.setRoleDescription(context.getString(R.string.toolbar_description));
       }
-    }
-    if (role.equals(AccessibilityRole.IMAGEBUTTON)) {
-      nodeInfo.setClickable(true);
+      if (role.equals(AccessibilityRole.HEADER)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.header_description));
+      }
+      if (role.equals(AccessibilityRole.SUMMARY)) {
+        nodeInfo.setRoleDescription(context.getString(R.string.summary_description));
+      }
     }
   }
 }
