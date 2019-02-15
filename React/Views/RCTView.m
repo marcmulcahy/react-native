@@ -211,6 +211,9 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
                                       @"off" : @"off",
                                       @"checked" : @"checked",
                                       @"unchecked" : @"not checked",
+                                      @"busy" : @"busy",
+                                      @"expanded" : @"expanded",
+                                      @"collapsed" : @"collapsed",
                                       };
   NSString *roleDescription = _accessibilityRole ? roleDescriptions[_accessibilityRole]: nil;
   if (roleDescription) {

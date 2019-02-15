@@ -46,6 +46,23 @@ RCT_MULTI_ENUM_CONVERTER(UIAccessibilityTraits, (@{
   @"adjustable": @(UIAccessibilityTraitAdjustable),
   @"allowsDirectInteraction": @(UIAccessibilityTraitAllowsDirectInteraction),
   @"pageTurn": @(UIAccessibilityTraitCausesPageTurn),
+  @"alert": @(UIAccessibilityTraitNone),
+  @"checkbox": @(UIAccessibilityTraitNone),
+  @"combobox": @(UIAccessibilityTraitNone),
+  @"editabletext": @(UIAccessibilityTraitNone),
+  @"menu": @(UIAccessibilityTraitNone),
+  @"menubar": @(UIAccessibilityTraitNone),
+  @"menuitem": @(UIAccessibilityTraitNone),
+  @"progressbar": @(UIAccessibilityTraitNone),
+  @"radiobutton": @(UIAccessibilityTraitNone),
+  @"radiogroup": @(UIAccessibilityTraitNone),
+  @"scrollbar": @(UIAccessibilityTraitNone),
+  @"spinbutton": @(UIAccessibilityTraitNone),
+  @"switch": @(UIAccessibilityTraitNone),
+  @"tab": @(UIAccessibilityTraitNone),
+  @"tablist": @(UIAccessibilityTraitNone),
+  @"timer": @(UIAccessibilityTraitNone),
+  @"toolbar": @(UIAccessibilityTraitNone),
 }), UIAccessibilityTraitNone, unsignedLongLongValue)
 
 @end
@@ -150,37 +167,16 @@ RCT_CUSTOM_VIEW_PROPERTY(transform, CATransform3D, RCTView)
   view.layer.allowsEdgeAntialiasing = !CATransform3DIsIdentity(view.layer.transform);
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(accessibilityRole, NSString, RCTView)
+RCT_CUSTOM_VIEW_PROPERTY(accessibilityRole, UIAccessibilityTraits, RCTView)
 {
-  NSString *role = json ? [RCTConvert NSString:json] : @"";
-  if ([role isEqualToString:@"button"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitButton;
-  }
-  else if ([role isEqualToString:@"link"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitLink;
-  }
-  else if ([role isEqualToString:@"header"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitHeader;
-  }
-  else if ([role isEqualToString:@"search"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSearchField;
-  }
-  else if ([role isEqualToString:@"image"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitImage;
-  }
-  else if ([role isEqualToString:@"keyboardkey"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitKeyboardKey;
-  }
-  else if ([role isEqualToString:@"text"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitStaticText;
-  }
-  else if ([role isEqualToString:@"summary"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSummaryElement;
-  }
-  else if ([role isEqualToString:@"adjustable"]) {
-      view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitAdjustable;
-  }
-  else {
+  const UIAccessibilityTraits AccessibilityRolesMask = UIAccessibilityTraitNone | UIAccessibilityTraitButton | UIAccessibilityTraitLink | UIAccessibilityTraitSearchField | UIAccessibilityTraitImage | UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitStaticText | UIAccessibilityTraitAdjustable | UIAccessibilityTraitHeader | UIAccessibilityTraitSummaryElement;
+  view.reactAccessibilityElement.accessibilityTraits = view.reactAccessibilityElement.accessibilityTraits & ~AccessibilityRolesMask;
+  UIAccessibilityTraits newTraits = json ? [RCTConvert UIAccessibilityTraits:json] : defaultView.accessibilityTraits;
+  if (newTraits != UIAccessibilityTraitNone) {
+    UIAccessibilityTraits maskedTraits = newTraits & AccessibilityRolesMask;
+    view.reactAccessibilityElement.accessibilityTraits |= maskedTraits;
+  } else {
+    NSString *role = json ? [RCTConvert NSString:json] : @"";
     ((RCTView *)view.reactAccessibilityElement).accessibilityRole = role;
   }
 }
@@ -193,6 +189,10 @@ RCT_CUSTOM_VIEW_PROPERTY(accessibilityStates, NSArray<NSString *>, RCTView)
   if (!states) {
     return;
   }
+
+  const UIAccessibilityTraits AccessibilityStatesMask = UIAccessibilityTraitNotEnabled | UIAccessibilityTraitSelected;
+  view.reactAccessibilityElement.accessibilityTraits = view.reactAccessibilityElement.accessibilityTraits & ~AccessibilityStatesMask;
+
   for (NSString *state in states) {
     if ([state isEqualToString:@"selected"]) {
       view.reactAccessibilityElement.accessibilityTraits |= UIAccessibilityTraitSelected;
