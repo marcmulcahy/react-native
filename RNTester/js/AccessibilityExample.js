@@ -11,7 +11,7 @@
 
 const React = require('react');
 const ReactNative = require('react-native');
-const {AccessibilityInfo, Text, View, TouchableOpacity, Alert, UIManager, findNodeHandle, Platform} = ReactNative;
+const {AccessibilityInfo, Button, Text, View, TouchableOpacity, Alert, UIManager, findNodeHandle, Platform} = ReactNative;
 
 const RNTesterBlock = require('./RNTesterBlock');
 
@@ -160,6 +160,63 @@ class CheckboxExample extends React.Component {
   }
 }
 
+class SelectionExample extends React.Component {
+  constructor(props) {
+    super(props);
+    this.selectableElement = React.createRef();
+  }
+
+  state = {
+    isSelected: true,
+    isEnabled: false,
+  };
+
+  render() {
+    let accessibilityStates = new Array();
+    let accessibilityHint = "click me to select";
+    if (this.state.isSelected) {
+      accessibilityStates.push('selected');
+      accessibilityHint = "click me to unselect";
+    }
+    if (!this.state.isEnabled) {
+      accessibilityStates.push('disabled');
+      accessibilityHint = "use the button on the right to enable selection"
+    }
+    let buttonTitle = this.state.isEnabled ? "Disable selection" : "Enable selection";
+
+    return (
+      <View style={{flex:1, flexDirection: 'row'}}>
+        <TouchableOpacity
+          ref={this.selectableElement}
+          accessible={true}
+          onPress={() => {
+            this.setState({
+              isSelected: !this.state.isSelected
+            });
+
+            if (Platform.OS === 'android') {
+              UIManager.sendAccessibilityEvent(
+                findNodeHandle(this.selectableElement.current),
+                UIManager.AccessibilityEventTypes.typeViewClicked);
+            }
+          }}
+          accessibilityLabel="element 21"
+          accessibilityStates={accessibilityStates}
+          accessibilityHint={accessibilityHint}>
+          <Text>Selectable element example</Text>
+        </TouchableOpacity>
+        <Button
+          onPress={() => {
+            this.setState({
+              isEnabled: !this.state.isEnabled
+            });
+          }}
+          title={buttonTitle}/>
+      </View>
+    );
+  }
+}
+
 class StateOnOffExample extends React.Component {
   state = {
     elementState: 'on',
@@ -252,7 +309,6 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
         <View
           accessibilityLabel="element 5"
           accessibilityRole="menu"
-          accessibilityStates={["hasPopup"]}
           accessible={true}>
           <Text>Menu example</Text>
         </View>
@@ -338,6 +394,7 @@ class AccessibilityRoleAndStateExample extends React.Component<{}> {
           <Text>State busy example</Text>
         </View>
         <ExpandableElementExample/>
+        <SelectionExample/>
       </View>
     );
   }
