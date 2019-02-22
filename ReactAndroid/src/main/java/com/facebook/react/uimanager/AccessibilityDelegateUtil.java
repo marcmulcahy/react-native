@@ -37,7 +37,7 @@ public class AccessibilityDelegateUtil {
   public static final HashMap<String, Integer> sActionIdMap= new HashMap<>();
   static {
       // one finger swipe gestures
-      sActionIdMap.put("click", AccessibilityActionCompat.ACTION_CLICK.getId());
+      sActionIdMap.put("activate", AccessibilityActionCompat.ACTION_CLICK.getId());
       sActionIdMap.put("increment", AccessibilityActionCompat.ACTION_SCROLL_FORWARD.getId());
       sActionIdMap.put("decrement", AccessibilityActionCompat.ACTION_SCROLL_BACKWARD.getId());      
   }

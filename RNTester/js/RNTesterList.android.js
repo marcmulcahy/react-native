@@ -14,6 +14,11 @@ import type {RNTesterExample} from 'RNTesterTypes';
 
 const ComponentExamples: Array<RNTesterExample> = [
   {
+    key: 'AccessibilityDemo',
+    module: require('./AccessibilityDemo'),
+    supportsTVOS: false,
+  },
+  {
     key: 'ActivityIndicatorExample',
     module: require('./ActivityIndicatorExample'),
   },
