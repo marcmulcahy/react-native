@@ -44,8 +44,9 @@ class Checkbox extends React.Component {
         style={{flex:1, flexDirection: 'row',}}
         onPress={this._onCheckboxPress}
         accessibilityLabel={this.props.name}
-        accessibilityRole="checkbox"
-        accessibilityStates={[this.state.checkboxState]}>
+        accessibilityRole='checkbox'
+        accessibilityStates={[this.state.checkboxState]}
+        accessibilityHint='Double tap to toggle'>
         <Image
           style={styles.image}
           source={this.state.checkboxState === 'checked' ? checkImageSource : uncheckImageSource}/>
@@ -61,12 +62,32 @@ class CheckboxExample extends React.Component {
   render() {
     return (
       <View>
-      <Text>Pizza Toppings</Text>
+        <Text>Choose Pizza Toppings</Text>
+        <Text
+          accessibilityRole='header'>
+          MEAT
+        </Text>
         <Checkbox
-          name='Pepperoni'
+          name='Ham'
           defaultState='checked'/>
         <Checkbox
-          name='Cheese'
+          name='Beef'
+          defaultState='unchecked'/>
+        <Checkbox
+          name='Pepperoni'
+          defaultState='unchecked'/>
+        <Text
+          accessibilityRole='header'>
+          NON-MEAT
+        </Text>
+        <Checkbox
+          name='Onions'
+          defaultState='unchecked'/>
+        <Checkbox
+          name='Mushrooms'
+          defaultState='unchecked'/>
+        <Checkbox
+          name='Cheddar Cheese'
           defaultState='unchecked'/>
       </View>
     );
