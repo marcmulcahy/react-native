@@ -267,7 +267,6 @@ class AccessibleSlider extends PureComponent {
     };
 
     const touchOverflowStyle = this._getTouchOverflowStyle();
-    const accessibilityLabel = this.props.accessibilityLabel + ", " + this._getValueText(this._getRatio(this._getCurrentValue()) * 100);
 
     return (
       <View
@@ -275,7 +274,8 @@ class AccessibleSlider extends PureComponent {
         style={[mainStyles.container, style]}
         onLayout={this._measureContainer}
         accessible={true}
-        accessibilityLabel={accessibilityLabel}
+        accessibilityLabel={this.props.accessibilityLabel}
+        accessibilityValue={this._getValueText(this._getRatio(this._getCurrentValue()) * 100)}
         accessibilityRole='adjustable'
         accessibilityActions={[
           {name : 'increment'},

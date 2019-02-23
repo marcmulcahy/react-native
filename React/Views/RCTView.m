@@ -213,6 +213,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 
 - (NSString *)accessibilityValue
 {
+  NSString *accessibilityValue = super.accessibilityValue;
+  if (accessibilityValue) {
+    return accessibilityValue;
+  }
   NSMutableString *value = [NSMutableString stringWithString:@""];
   NSDictionary *roleDescriptions = @{
                                      @"alert" : @"alert",

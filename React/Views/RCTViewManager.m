@@ -131,6 +131,7 @@ RCT_CUSTOM_VIEW_PROPERTY(accessibilityActions, NSArray<NSDictionary *> *, RCTVie
     view.accessibilityActions = json ? [RCTConvert NSDictionaryArray:json] : nil;
 }
 RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, reactAccessibilityElement.accessibilityLabel, NSString)
+RCT_REMAP_VIEW_PROPERTY(accessibilityValue, reactAccessibilityElement.accessibilityValue, NSString)
 RCT_REMAP_VIEW_PROPERTY(accessibilityHint, reactAccessibilityElement.accessibilityHint, NSString)
 RCT_REMAP_VIEW_PROPERTY(accessibilityTraits, reactAccessibilityElement.accessibilityTraits, UIAccessibilityTraits)
 RCT_REMAP_VIEW_PROPERTY(accessibilityViewIsModal, reactAccessibilityElement.accessibilityViewIsModal, BOOL)
