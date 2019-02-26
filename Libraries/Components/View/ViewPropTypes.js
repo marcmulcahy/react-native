@@ -397,6 +397,11 @@ export type ViewProps = $ReadOnly<{|
   accessibilityActions?: ?$ReadOnlyArray<object>,
 
   /**
+   * The value of the accessibility element, in a localized string.
+   */
+  accessibilityValue?: ?Stringish,
+
+  /**
    * Used to locate this view in end-to-end tests.
    *
    * > This disables the 'layout-only view removal' optimization for this view!
