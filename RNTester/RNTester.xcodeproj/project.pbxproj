@@ -133,6 +133,7 @@
 		C654F0B31EB34A73000B7A9A /* RNTesterTestModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C654F0B21EB34A73000B7A9A /* RNTesterTestModule.m */; };
 		C654F17E1EB34D24000B7A9A /* RNTesterTestModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C654F0B21EB34A73000B7A9A /* RNTesterTestModule.m */; };
 		D85B829E1AB6D5D7003F4FE2 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D85B829C1AB6D5CE003F4FE2 /* libRCTVibration.a */; };
+		DA3FF98422260A7200F404D9 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DA3FF9802225FE6500F404D9 /* Resources.bundle */; };
 		E77B20F321C481F8007FDF6D /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEBC7DA214C681C00DD5AC8 /* JavaScriptCore.framework */; };
 		ED2970992150247000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2970982150247000B7C4FE /* JavaScriptCore.framework */; };
 		EDEBC856214C774100DD5AC8 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEBC7DA214C681C00DD5AC8 /* JavaScriptCore.framework */; };
@@ -439,6 +440,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
 			remoteInfo = RCTVibration;
+		};
+		DA3FF97F2225FE6500F404D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14AADEFF1AC3DB95002390C9 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA3FF9472225F54400F404D9;
+			remoteInfo = Resources;
 		};
 		ED2970942150246200B7C4FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -878,6 +886,7 @@
 				EDEBC7CA214C503A00DD5AC8 /* libjsiexecutor.a */,
 				ED2970952150246200B7C4FE /* libjsi-tvOS.a */,
 				ED2970972150246200B7C4FE /* libjsiexecutor-tvOS.a */,
+				DA3FF9802225FE6500F404D9 /* Resources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1570,6 +1579,13 @@
 			remoteRef = D85B829B1AB6D5CE003F4FE2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DA3FF9802225FE6500F404D9 /* Resources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Resources.bundle;
+			remoteRef = DA3FF97F2225FE6500F404D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ED2970952150246200B7C4FE /* libjsi-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1617,6 +1633,7 @@
 				2DDEF0101F84BF7B00DBDF73 /* Images.xcassets in Resources */,
 				3D2AFAF51D646CF80089D1A3 /* legacy_image@2x.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DA3FF98422260A7200F404D9 /* Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

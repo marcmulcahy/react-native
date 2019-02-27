@@ -188,7 +188,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:unused)
 {
   NSMutableString *value = [NSMutableString stringWithString:@""];
   NSDictionary *roleDescriptions = @{
-                                     @"alert" : @"alert",
+                                     @"alert" : NSLocalizedString(@"alertDescription", nil),
                                      @"checkbox" : @"checkbox",
                                      @"combobox" : @"combo box",
                                      @"editabletext" : @"edit",

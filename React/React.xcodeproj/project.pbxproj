@@ -1098,6 +1098,7 @@
 		CF2731C11E7B8DE40044CA4F /* RCTDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2731BF1E7B8DE40044CA4F /* RCTDeviceInfo.m */; };
 		CF2731C21E7B8DEF0044CA4F /* RCTDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = CF2731BE1E7B8DE40044CA4F /* RCTDeviceInfo.h */; };
 		CF2731C31E7B8DF30044CA4F /* RCTDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2731BF1E7B8DE40044CA4F /* RCTDeviceInfo.m */; };
+		DA3FF9822226096D00F404D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3FF94F2225FA4E00F404D9 /* Localizable.strings */; };
 		E223624420875A8000108244 /* JSExecutor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E223624320875A8000108244 /* JSExecutor.cpp */; };
 		E9B20B7B1B500126007A2DA7 /* RCTAccessibilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B20B7A1B500126007A2DA7 /* RCTAccessibilityManager.m */; };
 		EBF21BBC1FC498270052F4D5 /* InspectorInterfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = EBF21BBA1FC498270052F4D5 /* InspectorInterfaces.h */; };
@@ -1210,6 +1211,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3D3C04B91DE3340900C268FA;
 			remoteInfo = yoga;
+		};
+		DA3FF94D2225F56700F404D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA3FF9462225F54400F404D9;
+			remoteInfo = Resources;
 		};
 		ED296F7D214C957300B7C4FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2220,6 +2228,9 @@
 		C6D380191F71D75B00621378 /* RAMBundleRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RAMBundleRegistry.cpp; sourceTree = "<group>"; };
 		CF2731BE1E7B8DE40044CA4F /* RCTDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTDeviceInfo.h; sourceTree = "<group>"; };
 		CF2731BF1E7B8DE40044CA4F /* RCTDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTDeviceInfo.m; sourceTree = "<group>"; };
+		DA3FF9472225F54400F404D9 /* Resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Resources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3FF9492225F54400F404D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA3FF9502225FA4E00F404D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E223624320875A8000108244 /* JSExecutor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSExecutor.cpp; sourceTree = "<group>"; };
 		E3BBC8EB1ADE6F47001BBD81 /* RCTTextDecorationLineType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextDecorationLineType.h; sourceTree = "<group>"; };
 		E9B20B791B500126007A2DA7 /* RCTAccessibilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTAccessibilityManager.h; sourceTree = "<group>"; };
@@ -2282,6 +2293,13 @@
 				2D1D83CE1F74E2DA00615550 /* libdouble-conversion.a in Frameworks */,
 				3D383D721EBD2949005632C8 /* libthird-party.a in Frameworks */,
 				3D8ED92C1E5B120100D83D20 /* libcxxreact.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA3FF9442225F54400F404D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2834,11 +2852,13 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DA3FF94F2225FA4E00F404D9 /* Localizable.strings */,
 				83CBBA2F1A601D0F00E9B192 /* React */,
 				3D788F841EBD2D240063D616 /* third-party.xcconfig */,
 				3D10A3C71DDF3CED004A0F9D /* ReactCommon */,
 				3D1FA0781DE4F2CD00E03CC6 /* Libraries */,
 				3D92B1151E036A690018521A /* ThirdParty */,
+				DA3FF9482225F54400F404D9 /* Resources */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				53D123821FBF1D49001B8A10 /* Frameworks */,
 			);
@@ -2866,6 +2886,7 @@
 				EDEBC73B214B45A300DD5AC8 /* libjsiexecutor.a */,
 				ED296FB6214C9A0900B7C4FE /* libjsi-tvOS.a */,
 				ED296FEE214C9CF800B7C4FE /* libjsiexecutor-tvOS.a */,
+				DA3FF9472225F54400F404D9 /* Resources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3008,6 +3029,14 @@
 				3D92B0D51E03699D0018521A /* SystraceSection.h */,
 			);
 			path = cxxreact;
+			sourceTree = "<group>";
+		};
+		DA3FF9482225F54400F404D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA3FF9492225F54400F404D9 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		EBF21BB91FC497DA0052F4D5 /* jsinspector */ = {
@@ -3789,6 +3818,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DA3FF94E2225F56700F404D9 /* PBXTargetDependency */,
 				EDEBC74F214B477400DD5AC8 /* PBXTargetDependency */,
 				EDEBC7D9214C628300DD5AC8 /* PBXTargetDependency */,
 				EDEBC74B214B46A700DD5AC8 /* PBXTargetDependency */,
@@ -3799,6 +3829,23 @@
 			productName = React;
 			productReference = 83CBBA2E1A601D0E00E9B192 /* libReact.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		DA3FF9462225F54400F404D9 /* Resources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA3FF94C2225F54400F404D9 /* Build configuration list for PBXNativeTarget "Resources" */;
+			buildPhases = (
+				DA3FF9432225F54400F404D9 /* Sources */,
+				DA3FF9442225F54400F404D9 /* Frameworks */,
+				DA3FF9452225F54400F404D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Resources;
+			productName = Resources;
+			productReference = DA3FF9472225F54400F404D9 /* Resources.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		EBF21BBF1FC498900052F4D5 /* jsinspector */ = {
 			isa = PBXNativeTarget;
@@ -3935,6 +3982,10 @@
 					83CBBA2D1A601D0E00E9B192 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					DA3FF9462225F54400F404D9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "React" */;
@@ -3966,9 +4017,21 @@
 				EDEBC724214B45A300DD5AC8 /* jsiexecutor */,
 				ED296F98214C9A0900B7C4FE /* jsi-tvOS */,
 				ED296FD0214C9CF800B7C4FE /* jsiexecutor-tvOS */,
+				DA3FF9462225F54400F404D9 /* Resources */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DA3FF9452225F54400F404D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA3FF9822226096D00F404D9 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		006B79A01A781F38006873D1 /* Start Packager */ = {
@@ -4556,6 +4619,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA3FF9432225F54400F404D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBF21BD31FC498900052F4D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4643,6 +4713,11 @@
 			target = 3D3C04B91DE3340900C268FA /* yoga */;
 			targetProxy = 53D123981FBF1E0C001B8A10 /* PBXContainerItemProxy */;
 		};
+		DA3FF94E2225F56700F404D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA3FF9462225F54400F404D9 /* Resources */;
+			targetProxy = DA3FF94D2225F56700F404D9 /* PBXContainerItemProxy */;
+		};
 		ED296F7E214C957300B7C4FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EDEBC6BA214B3E7000DD5AC8 /* jsi */;
@@ -4724,6 +4799,17 @@
 			targetProxy = EDEBC7D8214C628300DD5AC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DA3FF94F2225FA4E00F404D9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA3FF9502225FA4E00F404D9 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		139D7E8F1E25C6D100323FB7 /* Debug */ = {
@@ -5057,6 +5143,7 @@
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -5121,6 +5208,7 @@
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -5218,6 +5306,61 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/React;
 				RUN_CLANG_STATIC_ANALYZER = NO;
+			};
+			name = Release;
+		};
+		DA3FF94A2225F54400F404D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = Facebook.Resources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		DA3FF94B2225F54400F404D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = Facebook.Resources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -5556,6 +5699,15 @@
 			buildConfigurations = (
 				83CBBA401A601D0F00E9B192 /* Debug */,
 				83CBBA411A601D0F00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA3FF94C2225F54400F404D9 /* Build configuration list for PBXNativeTarget "Resources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA3FF94A2225F54400F404D9 /* Debug */,
+				DA3FF94B2225F54400F404D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
