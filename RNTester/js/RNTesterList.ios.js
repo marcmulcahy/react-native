@@ -14,185 +14,190 @@ import type {RNTesterExample} from 'RNTesterTypes';
 
 const ComponentExamples: Array<RNTesterExample> = [
   {
+    key: 'InaccessibilityDemo',
+    module: require('./InaccessibilityDemo'),
+    supportsTVOS: false,
+  },
+  {
     key: 'AccessibilityDemo',
     module: require('./AccessibilityDemo'),
     supportsTVOS: false,
   },
-  {
-    key: 'ActivityIndicatorExample',
-    module: require('./ActivityIndicatorExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ARTExample',
-    module: require('./ARTExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ButtonExample',
-    module: require('./ButtonExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'DatePickerIOSExample',
-    module: require('./DatePickerIOSExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'FlatListExample',
-    module: require('./FlatListExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ImageExample',
-    module: require('./ImageExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'InputAccessoryViewExample',
-    module: require('./InputAccessoryViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'KeyboardAvoidingViewExample',
-    module: require('./KeyboardAvoidingViewExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'LayoutEventsExample',
-    module: require('./LayoutEventsExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ListViewExample',
-    module: require('./ListViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ListViewGridLayoutExample',
-    module: require('./ListViewGridLayoutExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ListViewPagingExample',
-    module: require('./ListViewPagingExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'MaskedViewExample',
-    module: require('./MaskedViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ModalExample',
-    module: require('./ModalExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'MultiColumnExample',
-    module: require('./MultiColumnExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'PickerExample',
-    module: require('./PickerExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'PickerIOSExample',
-    module: require('./PickerIOSExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'ProgressViewIOSExample',
-    module: require('./ProgressViewIOSExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'RefreshControlExample',
-    module: require('./RefreshControlExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'ScrollViewSimpleExample',
-    module: require('./ScrollViewSimpleExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'SafeAreaViewExample',
-    module: require('./SafeAreaViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'ScrollViewExample',
-    module: require('./ScrollViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'SectionListExample',
-    module: require('./SectionListExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'SegmentedControlIOSExample',
-    module: require('./SegmentedControlIOSExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'SliderExample',
-    module: require('./SliderExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'StatusBarExample',
-    module: require('./StatusBarExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'SwipeableFlatListExample',
-    module: require('./SwipeableFlatListExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'SwipeableListViewExample',
-    module: require('./SwipeableListViewExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'SwitchExample',
-    module: require('./SwitchExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'TextExample',
-    module: require('./TextExample.ios'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'TextInputExample',
-    module: require('./TextInputExample.ios'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'TouchableExample',
-    module: require('./TouchableExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'TransparentHitTestExample',
-    module: require('./TransparentHitTestExample'),
-    supportsTVOS: false,
-  },
-  {
-    key: 'ViewExample',
-    module: require('./ViewExample'),
-    supportsTVOS: true,
-  },
-  {
-    key: 'WebViewExample',
-    module: require('./WebViewExample'),
-    supportsTVOS: false,
-  },
+  // {
+  //   key: 'ActivityIndicatorExample',
+  //   module: require('./ActivityIndicatorExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ARTExample',
+  //   module: require('./ARTExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ButtonExample',
+  //   module: require('./ButtonExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'DatePickerIOSExample',
+  //   module: require('./DatePickerIOSExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'FlatListExample',
+  //   module: require('./FlatListExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ImageExample',
+  //   module: require('./ImageExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'InputAccessoryViewExample',
+  //   module: require('./InputAccessoryViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'KeyboardAvoidingViewExample',
+  //   module: require('./KeyboardAvoidingViewExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'LayoutEventsExample',
+  //   module: require('./LayoutEventsExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ListViewExample',
+  //   module: require('./ListViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ListViewGridLayoutExample',
+  //   module: require('./ListViewGridLayoutExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ListViewPagingExample',
+  //   module: require('./ListViewPagingExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'MaskedViewExample',
+  //   module: require('./MaskedViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ModalExample',
+  //   module: require('./ModalExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'MultiColumnExample',
+  //   module: require('./MultiColumnExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'PickerExample',
+  //   module: require('./PickerExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'PickerIOSExample',
+  //   module: require('./PickerIOSExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'ProgressViewIOSExample',
+  //   module: require('./ProgressViewIOSExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'RefreshControlExample',
+  //   module: require('./RefreshControlExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'ScrollViewSimpleExample',
+  //   module: require('./ScrollViewSimpleExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'SafeAreaViewExample',
+  //   module: require('./SafeAreaViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'ScrollViewExample',
+  //   module: require('./ScrollViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'SectionListExample',
+  //   module: require('./SectionListExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'SegmentedControlIOSExample',
+  //   module: require('./SegmentedControlIOSExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'SliderExample',
+  //   module: require('./SliderExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'StatusBarExample',
+  //   module: require('./StatusBarExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'SwipeableFlatListExample',
+  //   module: require('./SwipeableFlatListExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'SwipeableListViewExample',
+  //   module: require('./SwipeableListViewExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'SwitchExample',
+  //   module: require('./SwitchExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'TextExample',
+  //   module: require('./TextExample.ios'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'TextInputExample',
+  //   module: require('./TextInputExample.ios'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'TouchableExample',
+  //   module: require('./TouchableExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'TransparentHitTestExample',
+  //   module: require('./TransparentHitTestExample'),
+  //   supportsTVOS: false,
+  // },
+  // {
+  //   key: 'ViewExample',
+  //   module: require('./ViewExample'),
+  //   supportsTVOS: true,
+  // },
+  // {
+  //   key: 'WebViewExample',
+  //   module: require('./WebViewExample'),
+  //   supportsTVOS: false,
+  // },
 ];
 
 const APIExamples: Array<RNTesterExample> = [

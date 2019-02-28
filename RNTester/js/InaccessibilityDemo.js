@@ -12,7 +12,6 @@
 const React = require('react');
 const ReactNative = require('react-native');
 const {Image, StyleSheet, Text, View, TouchableOpacity, UIManager, findNodeHandle, Platform} = ReactNative;
-const AccessibleSlider = require('./AccessibleSlider');
 const Slider = require('./CustomSlider');
 
 const checkImageSource = require('./check.png');
@@ -42,11 +41,7 @@ class Checkbox extends React.Component {
     return (
       <TouchableOpacity
         style={{flex:1, flexDirection: 'row',}}
-        onPress={this._onCheckboxPress}
-        accessibilityLabel={this.props.name}
-        accessibilityRole='checkbox'
-        accessibilityStates={[this.state.checkboxState]}
-        accessibilityHint='Double tap to toggle'>
+        onPress={this._onCheckboxPress}>
         <Image
           style={styles.image}
           source={this.state.checkboxState === 'checked' ? checkImageSource : uncheckImageSource}/>
@@ -63,11 +58,9 @@ class CheckboxExample extends React.Component {
     return (
       <View>
         <Text>Choose Pizza Toppings</Text>
-        <View
-          accessibilityLabel='meat'
-          accessibilityRole='header'>
-          <Text>MEAT</Text>
-        </View>
+        <Text>
+          MEAT
+        </Text>
         <Checkbox
           name='Ham'
           defaultState='checked'/>
@@ -77,11 +70,9 @@ class CheckboxExample extends React.Component {
         <Checkbox
           name='Pepperoni'
           defaultState='unchecked'/>
-        <View
-          accessibilityLabel='non-meat'
-          accessibilityRole='header'>
-          <Text>NON-MEAT</Text>
-        </View>
+        <Text>
+          NON-MEAT
+        </Text>
         <Checkbox
           name='Onions'
           defaultState='unchecked'/>
@@ -96,22 +87,20 @@ class CheckboxExample extends React.Component {
   }
 }
 
-class AccessibleSliderExample extends React.Component {
+class NonaccessibleSliderExample extends React.Component {
   state = {
     value: 0.2
   };
 
   render() {
-    let valueText = 'Value: ' + (this.state.value * 100).toFixed(0) + '%';
     return (
       <View style={styles.container}>
-        <AccessibleSlider
-          accessibilityLabel={'Display Brightness.'}
+        <Slider
           value={this.state.value}
           onValueChange={value => this.setState({ value })}
         />
         <Text>
-          {valueText}
+          Value: {(this.state.value * 100).toFixed(0) + '%'}
         </Text>
       </View>
     );
@@ -134,19 +123,19 @@ const styles = StyleSheet.create({
   },
 });
 
-exports.title = 'Accessible Examples';
-exports.description = 'Examples of accessible elements.';
+exports.title = 'Non-accessible Examples';
+exports.description = 'Examples of non-accessible elements.';
 exports.examples = [
   {
-    title: 'Accessible Checkbox Example',
+    title: 'Checkbox Example',
     render(): React.Element<typeof CheckboxExample> {
       return <CheckboxExample />;
     },
   },
   {
-    title: 'Accessible Slider Example',
-    render(): React.Element<typeof AccessibleSliderExample> {
-      return <AccessibleSliderExample />;
+    title: 'Slider Example',
+    render(): React.Element<typeof NonaccessibleSliderExample> {
+      return <NonaccessibleSliderExample />;
     },
   },
 ];

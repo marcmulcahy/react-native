@@ -14,128 +14,133 @@ import type {RNTesterExample} from 'RNTesterTypes';
 
 const ComponentExamples: Array<RNTesterExample> = [
   {
+    key: 'InaccessibilityDemo',
+    module: require('./InaccessibilityDemo'),
+    supportsTVOS: false,
+  },
+  {
     key: 'AccessibilityDemo',
     module: require('./AccessibilityDemo'),
     supportsTVOS: false,
   },
-  {
-    key: 'ActivityIndicatorExample',
-    module: require('./ActivityIndicatorExample'),
-  },
-  {
-    key: 'ButtonExample',
-    module: require('./ButtonExample'),
-  },
-  {
-    key: 'CheckBoxExample',
-    module: require('./CheckBoxExample'),
-  },
-  {
-    key: 'FlatListExample',
-    module: require('./FlatListExample'),
-  },
-  {
-    key: 'ImageExample',
-    module: require('./ImageExample'),
-  },
-  {
-    key: 'ListViewExample',
-    module: require('./ListViewExample'),
-  },
-  {
-    key: 'ListViewGridLayoutExample',
-    module: require('./ListViewGridLayoutExample'),
-  },
-  {
-    key: 'ListViewPagingExample',
-    module: require('./ListViewPagingExample'),
-  },
-  {
-    key: 'ModalExample',
-    module: require('./ModalExample'),
-  },
-  {
-    key: 'MultiColumnExample',
-    module: require('./MultiColumnExample'),
-  },
-  {
-    key: 'PickerExample',
-    module: require('./PickerExample'),
-  },
-  {
-    key: 'ProgressBarAndroidExample',
-    /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
-     * when making Flow check .android.js files. */
-    module: require('./ProgressBarAndroidExample'),
-  },
-  {
-    key: 'RefreshControlExample',
-    module: require('./RefreshControlExample'),
-  },
-  {
-    key: 'ScrollViewSimpleExample',
-    module: require('./ScrollViewSimpleExample'),
-  },
-  {
-    key: 'SectionListExample',
-    module: require('./SectionListExample'),
-  },
-  {
-    key: 'SliderExample',
-    module: require('./SliderExample'),
-  },
-  {
-    key: 'StatusBarExample',
-    module: require('./StatusBarExample'),
-  },
-  {
-    key: 'SwipeableFlatListExample',
-    module: require('./SwipeableFlatListExample'),
-  },
-  {
-    key: 'SwipeableListViewExample',
-    module: require('./SwipeableListViewExample'),
-  },
-  {
-    key: 'SwitchExample',
-    module: require('./SwitchExample'),
-  },
-  {
-    key: 'TextExample',
-    /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
-     * when making Flow check .android.js files. */
-    module: require('./TextExample'),
-  },
-  {
-    key: 'TextInputExample',
-    /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
-     * when making Flow check .android.js files. */
-    module: require('./TextInputExample'),
-  },
-  {
-    key: 'ToolbarAndroidExample',
-    /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
-     * when making Flow check .android.js files. */
-    module: require('./ToolbarAndroidExample'),
-  },
-  {
-    key: 'TouchableExample',
-    module: require('./TouchableExample'),
-  },
-  {
-    key: 'ViewExample',
-    module: require('./ViewExample'),
-  },
-  {
-    key: 'ViewPagerAndroidExample',
-    /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
-     * when making Flow check .android.js files. */
-    module: require('./ViewPagerAndroidExample'),
-  },
-  {
-    key: 'WebViewExample',
-    module: require('./WebViewExample'),
-  },
+  // {
+  //   key: 'ActivityIndicatorExample',
+  //   module: require('./ActivityIndicatorExample'),
+  // },
+  // {
+  //   key: 'ButtonExample',
+  //   module: require('./ButtonExample'),
+  // },
+  // {
+  //   key: 'CheckBoxExample',
+  //   module: require('./CheckBoxExample'),
+  // },
+  // {
+  //   key: 'FlatListExample',
+  //   module: require('./FlatListExample'),
+  // },
+  // {
+  //   key: 'ImageExample',
+  //   module: require('./ImageExample'),
+  // },
+  // {
+  //   key: 'ListViewExample',
+  //   module: require('./ListViewExample'),
+  // },
+  // {
+  //   key: 'ListViewGridLayoutExample',
+  //   module: require('./ListViewGridLayoutExample'),
+  // },
+  // {
+  //   key: 'ListViewPagingExample',
+  //   module: require('./ListViewPagingExample'),
+  // },
+  // {
+  //   key: 'ModalExample',
+  //   module: require('./ModalExample'),
+  // },
+  // {
+  //   key: 'MultiColumnExample',
+  //   module: require('./MultiColumnExample'),
+  // },
+  // {
+  //   key: 'PickerExample',
+  //   module: require('./PickerExample'),
+  // },
+  // {
+  //   key: 'ProgressBarAndroidExample',
+  //   /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
+  //    * when making Flow check .android.js files. */
+  //   module: require('./ProgressBarAndroidExample'),
+  // },
+  // {
+  //   key: 'RefreshControlExample',
+  //   module: require('./RefreshControlExample'),
+  // },
+  // {
+  //   key: 'ScrollViewSimpleExample',
+  //   module: require('./ScrollViewSimpleExample'),
+  // },
+  // {
+  //   key: 'SectionListExample',
+  //   module: require('./SectionListExample'),
+  // },
+  // {
+  //   key: 'SliderExample',
+  //   module: require('./SliderExample'),
+  // },
+  // {
+  //   key: 'StatusBarExample',
+  //   module: require('./StatusBarExample'),
+  // },
+  // {
+  //   key: 'SwipeableFlatListExample',
+  //   module: require('./SwipeableFlatListExample'),
+  // },
+  // {
+  //   key: 'SwipeableListViewExample',
+  //   module: require('./SwipeableListViewExample'),
+  // },
+  // {
+  //   key: 'SwitchExample',
+  //   module: require('./SwitchExample'),
+  // },
+  // {
+  //   key: 'TextExample',
+  //   /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
+  //    * when making Flow check .android.js files. */
+  //   module: require('./TextExample'),
+  // },
+  // {
+  //   key: 'TextInputExample',
+  //   /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
+  //    * when making Flow check .android.js files. */
+  //   module: require('./TextInputExample'),
+  // },
+  // {
+  //   key: 'ToolbarAndroidExample',
+  //   /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
+  //    * when making Flow check .android.js files. */
+  //   module: require('./ToolbarAndroidExample'),
+  // },
+  // {
+  //   key: 'TouchableExample',
+  //   module: require('./TouchableExample'),
+  // },
+  // {
+  //   key: 'ViewExample',
+  //   module: require('./ViewExample'),
+  // },
+  // {
+  //   key: 'ViewPagerAndroidExample',
+  //   /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was found
+  //    * when making Flow check .android.js files. */
+  //   module: require('./ViewPagerAndroidExample'),
+  // },
+  // {
+  //   key: 'WebViewExample',
+  //   module: require('./WebViewExample'),
+  // },
 ];
 
 const APIExamples: Array<RNTesterExample> = [

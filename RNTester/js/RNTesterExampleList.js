@@ -78,11 +78,11 @@ class RNTesterExampleList extends React.Component<Props, $FlowFixMeState> {
         title: 'COMPONENTS',
         key: 'c',
       },
-      {
-        data: this.props.list.APIExamples,
-        title: 'APIS',
-        key: 'a',
-      },
+      // {
+      //   data: this.props.list.APIExamples,
+      //   title: 'APIS',
+      //   key: 'a',
+      // },
     ];
 
     return (
@@ -104,7 +104,7 @@ class RNTesterExampleList extends React.Component<Props, $FlowFixMeState> {
               keyboardShouldPersistTaps="handled"
               automaticallyAdjustContentInsets={false}
               keyboardDismissMode="on-drag"
-              renderSectionHeader={renderSectionHeader}
+              // renderSectionHeader={renderSectionHeader}
             />
           )}
         />
