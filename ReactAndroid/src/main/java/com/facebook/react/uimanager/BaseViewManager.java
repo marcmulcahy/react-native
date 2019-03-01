@@ -40,6 +40,7 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
   private static final String PROP_ACCESSIBILITY_ROLE = "accessibilityRole";
   private static final String PROP_ACCESSIBILITY_STATES = "accessibilityStates";
   private static final String PROP_ACCESSIBILITY_ACTIONS = "accessibilityActions";
+  private static final String PROP_ACCESSIBILITY_VALUE = "accessibilityValue";
   private static final String PROP_IMPORTANT_FOR_ACCESSIBILITY = "importantForAccessibility";
 
   // DEPRECATED
@@ -166,13 +167,23 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
     }
   }
 
+  @ReactProp(name = PROP_ACCESSIBILITY_VALUE)
+  public void setAccessibilityValue(T view, String accessibilityValue) {
+    view.setTag(R.id.accessibility_value, accessibilityValue);
+    updateViewContentDescription(view);
+  }
+
   private void updateViewContentDescription(T view) {
     final String accessibilityLabel = (String) view.getTag(R.id.accessibility_label);
     final ReadableArray accessibilityStates = (ReadableArray) view.getTag(R.id.accessibility_states);
+    final String accessibilityValue = (String) view.getTag(R.id.accessibility_value);
     final String accessibilityHint = (String) view.getTag(R.id.accessibility_hint);
     StringBuilder contentDescription = new StringBuilder();
     if (accessibilityLabel != null) {
       contentDescription.append(accessibilityLabel + ", ");
+    }
+    if (accessibilityValue != null) {
+      contentDescription.append(accessibilityValue + ", ");
     }
     if (accessibilityStates != null) {
       for (int i = 0; i < accessibilityStates.size(); i++) {
