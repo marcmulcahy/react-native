@@ -133,6 +133,73 @@ class AccessibilityExample extends React.Component {
   }
 }
 
+class AccessibilityActionsExample extends React.Component {
+  render() {
+    return (
+      <View>
+        <RNTesterBlock title="Non-touchable with activate action">
+          <View
+            accessible={true}
+            accessibilityActions={[{name: 'activate'}]}
+            onAccessibilityAction={event => {
+              switch (event.nativeEvent.actionName) {
+                case 'activate':
+                  Alert.alert('Alert', 'View is clicked');
+                  break;
+              }
+            }}>
+            <Text>Click me</Text>
+          </View>
+        </RNTesterBlock>
+
+        <RNTesterBlock title="View with multiple actions">
+          <View
+            accessible={true}
+            accessibilityActions={[
+              {name: 'cut', label: 'cut label'},
+              {name: 'copy', label: 'copy label'},
+              {name: 'paste', label: 'paste label'},
+            ]}
+            onAccessibilityAction={event => {
+              switch (event.nativeEvent.actionName) {
+                case 'cut':
+                  Alert.alert('Alert', 'cut action success');
+                  break;
+                case 'copy':
+                  Alert.alert('Alert', 'copy action success');
+                  break;
+                case 'paste':
+                  Alert.alert('Alert', 'paste action success');
+                  break;
+              }
+            }}>
+            <Text>This view supports many actions.</Text>
+          </View>
+        </RNTesterBlock>
+
+        <RNTesterBlock title="Adjustable with increment/decrement actions">
+          <View
+            accessible={true}
+            accessibilityRole="adjustable"
+            accessibilityActions={[{name: 'increment'}, {name: 'decrement'}]}
+            onAccessibilityAction={event => {
+              switch (event.nativeEvent.actionName) {
+                case 'increment':
+                  Alert.alert('Alert', 'increment action success');
+                  break;
+                case 'decrement':
+                  Alert.alert('Alert', 'decrement action success');
+                  break;
+              }
+            }}>
+            <Text>Slider</Text>
+          </View>
+        </RNTesterBlock>
+      </View>
+    );
+  }
+}
+
 class ScreenReaderStatusExample extends React.Component<{}> {
   state = {
     screenReaderEnabled: false,
@@ -182,6 +249,12 @@ exports.examples = [
     title: 'Accessibility elements',
     render(): React.Element<typeof AccessibilityExample> {
       return <AccessibilityExample />;
+    },
+  },
+  {
+    title: 'Accessibility action examples',
+    render(): React.Element<typeof AccessibilityActionsExample> {
+      return <AccessibilityActionsExample />;
     },
   },
   {
