@@ -10,7 +10,12 @@
 
 'use strict';
 
-import type {PressEvent, Layout, LayoutEvent} from 'CoreEventTypes';
+import type {
+  PressEvent,
+  Layout,
+  LayoutEvent,
+  SyntheticEvent,
+} from 'CoreEventTypes';
 import type {EdgeInsetsProp} from 'EdgeInsetsPropType';
 import type React from 'React';
 import type {ViewStyleProp} from 'StyleSheet';
@@ -30,9 +35,8 @@ type DirectEventProps = $ReadOnly<{|
    * When `accessible` is true, the system will try to invoke this function
    * when the user performs an accessibility custom action.
    *
-   * @platform ios
    */
-  onAccessibilityAction?: ?(string) => void,
+  onAccessibilityAction?: ?(event: SyntheticEvent) => void,
 
   /**
    * When `accessible` is true, the system will try to invoke this function
@@ -323,13 +327,6 @@ type AndroidViewProps = $ReadOnly<{|
 
 type IOSViewProps = $ReadOnly<{|
   /**
-   * Provides an array of custom actions available for accessibility.
-   *
-   * @platform ios
-   */
-  accessibilityActions?: ?$ReadOnlyArray<string>,
-
-  /**
    * Prevents view from being inverted if set to true and color inversion is turned on.
    *
    * @platform ios
@@ -432,6 +429,12 @@ export type ViewProps = $ReadOnly<{|
    * Indicates to accessibility services that UI Component is in a specific State.
    */
   accessibilityStates?: ?AccessibilityStates,
+
+  /**
+   * Provides an array of custom actions available for accessibility.
+   *
+   */
+  accessibilityActions?: ?$ReadOnlyArray<object>,
 
   /**
    * Used to locate this view in end-to-end tests.
