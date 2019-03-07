@@ -15,4 +15,7 @@
   <!--tag is used to store accessibilityRole tag-->
   <item type="id" name="accessibility_role"/>
 
+  <!--tag is used to store accessibilityActions tag-->
+  <item type="id" name="accessibility_actions"/>
+
 </resources>
