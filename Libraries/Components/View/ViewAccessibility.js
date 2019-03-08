@@ -60,13 +60,13 @@ export type AccessibilityStates = $ReadOnlyArray<'disabled' | 'selected'>;
 
 // the info associated with an accessibility action
 export type AccessibilityActionInfo = $ReadOnly<{
-name: string,
-    label?: string,
+  name: string,
+  label?: string,
 }>;
 
 // The info included in the event sent to onAccessibilityAction
 export type AccessibilityActionEvent = SyntheticEvent<
-$ReadOnly<{
-actionName: string,
-}>,
+  $ReadOnly<{
+    actionName: string,
+  }>,
 >;

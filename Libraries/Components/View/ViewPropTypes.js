@@ -10,19 +10,15 @@
 
 'use strict';
 
-import type {
-  PressEvent,
-  Layout,
-  LayoutEvent,
-} from 'CoreEventTypes';
+import type {PressEvent, Layout, LayoutEvent} from 'CoreEventTypes';
 import type {EdgeInsetsProp} from 'EdgeInsetsPropType';
 import type React from 'React';
 import type {ViewStyleProp} from 'StyleSheet';
 import type {TVViewProps} from 'TVViewPropTypes';
 import type {
   AccessibilityActionEvent,
-    AccessibilityActionInfo,
-    AccessibilityComponentType,
+  AccessibilityActionInfo,
+  AccessibilityComponentType,
   AccessibilityTrait,
   AccessibilityRole,
   AccessibilityStates,
