@@ -36,7 +36,7 @@ type DirectEventProps = $ReadOnly<{|
    * when the user performs an accessibility custom action.
    *
    */
-  onAccessibilityAction?: ?(event: SyntheticEvent) => void,
+  onAccessibilityAction?: ?(event: AccessibilityActionEvent) => void,
 
   /**
    * When `accessible` is true, the system will try to invoke this function
@@ -221,6 +221,16 @@ type AndroidDrawableRipple = $ReadOnly<{|
 |}>;
 
 type AndroidDrawable = AndroidDrawableThemeAttr | AndroidDrawableRipple;
+
+type AccessibilityActionInfo = $ReadOnly<{
+name: string,
+label?: string,
+}>;
+type AccessibilityActionEvent = SyntheticEvent<
+$ReadOnly<{
+actionName: string,
+}>,
+>;
 
 type AndroidViewProps = $ReadOnly<{|
   nativeBackgroundAndroid?: ?AndroidDrawable,
@@ -434,7 +444,7 @@ export type ViewProps = $ReadOnly<{|
    * Provides an array of custom actions available for accessibility.
    *
    */
-  accessibilityActions?: ?$ReadOnlyArray<object>,
+  accessibilityActions?: ?$ReadOnlyArray<AccessibilityActionInfo>,
 
   /**
    * Used to locate this view in end-to-end tests.
