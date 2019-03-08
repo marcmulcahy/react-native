@@ -14,14 +14,15 @@ import type {
   PressEvent,
   Layout,
   LayoutEvent,
-  SyntheticEvent,
 } from 'CoreEventTypes';
 import type {EdgeInsetsProp} from 'EdgeInsetsPropType';
 import type React from 'React';
 import type {ViewStyleProp} from 'StyleSheet';
 import type {TVViewProps} from 'TVViewPropTypes';
 import type {
-  AccessibilityComponentType,
+  AccessibilityActionEvent,
+    AccessibilityActionInfo,
+    AccessibilityComponentType,
   AccessibilityTrait,
   AccessibilityRole,
   AccessibilityStates,
@@ -221,16 +222,6 @@ type AndroidDrawableRipple = $ReadOnly<{|
 |}>;
 
 type AndroidDrawable = AndroidDrawableThemeAttr | AndroidDrawableRipple;
-
-type AccessibilityActionInfo = $ReadOnly<{
-name: string,
-label?: string,
-}>;
-type AccessibilityActionEvent = SyntheticEvent<
-$ReadOnly<{
-actionName: string,
-}>,
->;
 
 type AndroidViewProps = $ReadOnly<{|
   nativeBackgroundAndroid?: ?AndroidDrawable,
